@@ -3,7 +3,6 @@ const Explorer = require('@harmonyhub/discover').Explorer
 const HarmonyHubWS = require('harmonyhubws')
 
 let currentHarmonyHub
-let started = false
 
 const discover = new Explorer(61991)
 
@@ -33,7 +32,7 @@ discover.on('online', ({ ip }) => {
 
 discover.start()
 
-const getHarmonyHub = () => new Promise((resolve, reject) => {
+const getHarmonyHub = (t = 10) => new Promise((resolve, reject) => {
   if (currentHarmonyHub) {
     resolve(currentHarmonyHub)
   }
@@ -44,14 +43,14 @@ const getHarmonyHub = () => new Promise((resolve, reject) => {
     } else {
       reject('Can\'t find Harmony Hub')
     }
-  }, t)
+  }, t * 1000)
 })
 
-const getHarmonyHubConfig = () => new Promise(async resolve => {
+const getHarmonyHubConfig = (t = 10) => new Promise(async resolve => {
   const harmonyHub = await getHarmonyHub()
 
   const timedOut = false
-  const timeout = setTimeout(() => reject('Harmony Hub config timeout'), 15 * 1000)
+  const timeout = setTimeout(() => reject('Harmony Hub config timeout'), t * 1000)
 
   const configHandler = config => {
     if (timedOut) {
