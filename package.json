@@ -1,0 +1,17 @@
+{
+  "name": "chromecast-harmony-watchdog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "author": "SBRK",
+  "license": "ISC",
+  "dependencies": {
+    "@harmonyhub/discover": "^1.0.8",
+    "chromecast-discover": "^1.0.7",
+    "harmonyhubws": "^1.0.6",
+    "lodash": "^4.17.11"
+  }
+}
